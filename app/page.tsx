@@ -1,8 +1,11 @@
 'use client';
 import { useState, useEffect } from "react";
-import UrlResult from "./components/urlResult";
+import ReactDOM from 'react-dom';
+import ReactPaginate from 'react-paginate';
 
 import * as styles from "./global.module.css";
+import UrlResult from "./components/urlResult";
+
 
 export default function Home() {
   const [url, setUrl] = useState<string>('');
@@ -24,7 +27,7 @@ export default function Home() {
 
   const onClickSubmitHandler = async (e) => {
     e.preventDefault();
-    
+
     const urlPattern = /^(https?:\/\/.)[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
     if (!urlPattern.test(url.trim())) {
       alert('Please enter a valid URL.');
@@ -36,14 +39,14 @@ export default function Home() {
         mode: 'no-cors'
       });
 
-      if (response) {
-        setUrlResults(prev => {
-          const updatedResults = [url, ...prev];
-          localStorage.setItem('urlResults', JSON.stringify(updatedResults));
-          return updatedResults;
-        });
-        setUrl('');
-      }
+    if (response) {
+    setUrlResults(prev => {
+      const updatedResults = [url, ...prev];
+      localStorage.setItem('urlResults', JSON.stringify(updatedResults));
+      return updatedResults;
+    });
+    setUrl('');
+    }
     } catch (error) {
       alert('Website does not exist');
     }
@@ -79,46 +82,80 @@ export default function Home() {
 
       if (response) {
         let newUrlResults = [...urlResults];
-    newUrlResults[index] = editUrl;
+        newUrlResults[index] = editUrl;
 
-    setUrlResults(newUrlResults);
-    localStorage.setItem('urlResults', JSON.stringify(newUrlResults));
-    setEditUrl("");
-    setValue("");
+        setUrlResults(newUrlResults);
+        localStorage.setItem('urlResults', JSON.stringify(newUrlResults));
+        setEditUrl("");
+        setValue("");
       }
     } catch (error) {
       alert('Website does not exist');
     }
   };
 
+  function Items({ currentItems }) {
+    return (
+      <ul style={{ flexDirection: 'column' }}>
+        {currentItems &&
+          currentItems.map((item, index) => (
+            <UrlResult
+              key={index}
+              index={index}
+              urlTitle={item}
+              deleteUrlResultHandler={() => deleteUrlResultHandler(index)}
+              onClick={(e) => onClickUrlSubmitHandler(e, index)}
+              onChange={(e) => onChangeUrlEditHandler(e)}
+              value={value}
+            />
+          ))}
+      </ul>
+    );
+  }
+
+  function PaginatedItems({ itemsPerPage }) {
+    const [itemOffset, setItemOffset] = useState(0);
+    const endOffset = itemOffset + itemsPerPage;
+    const currentItems = urlResults.slice(itemOffset, endOffset);
+    const pageCount = Math.ceil(urlResults.length / itemsPerPage);
+
+    const handlePageClick = (event) => {
+      const newOffset = (event.selected * itemsPerPage) % urlResults.length;
+      setItemOffset(newOffset);
+    };
+
+    return (
+      <>
+        <Items currentItems={currentItems} />
+        <ul className={styles.paginationContainer}>
+          <ReactPaginate
+            breakLabel=""
+            nextLabel=">"
+            onPageChange={handlePageClick}
+            pageRangeDisplayed={2}
+            marginPagesDisplayed={0}
+            pageCount={pageCount}
+            previousLabel="<"
+            renderOnZeroPageCount={null}
+            containerClassName="paginationContainer"
+          />
+        </ul>
+      </>
+    )
+  }
+
   return (
-    // <main className="flex min-h-screen flex-col items-center p-24">
-    //   <div className="z-10 max-w-5xl w-full items-center font-mono text-sm">
-      <main className="flex flex-col items-center">
-      <div className="items-center" style={{width: '80%'}}>
-      <div className={`${styles.pillShape} ${styles.searchBar}`}>
-        <form>
-          <input onChange={onChangeUrlInputHandler} value={url} type="url" />
-          <button type="submit" onClick={onClickSubmitHandler}>Add</button>
-        </form>
+    <main className="flex flex-col items-center">
+      <div className="" style={{ width: '80%' }}>
+        <div className={`${styles.pillShape} ${styles.searchBar}`}>
+          <form>
+            <input onChange={onChangeUrlInputHandler} value={url} type="url" />
+            <button type="submit" onClick={onClickSubmitHandler}>Add</button>
+          </form>
         </div>
-        <div>
-          <ul style={{ flexDirection: 'column'}}>
-            {urlResults.map((item, index) => (
-              <UrlResult
-                key={index}
-                index={index}
-                urlTitle={item}
-                deleteUrlResultHandler={() => deleteUrlResultHandler(index)}
-                //DO NOT CHANGE THIS ONCLICK FUNCTION
-                onClick={(e) => onClickUrlSubmitHandler(e, index)}
-                onChange={(e) => onChangeUrlEditHandler(e)}
-                value={value}
-              />
-            ))}
-          </ul>
-        </div>
+        <PaginatedItems itemsPerPage={20} />
       </div>
     </main>
   );
 };
+

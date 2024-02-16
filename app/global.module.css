@@ -10,5 +10,20 @@
 }
 
 .searchBar {
-    background-color: rgba(0, 0, 255, 0.612);
+    background-color: rgba(255, 0, 212, 0.612);
 }
+
+.paginationContainer{
+    padding: 5px;
+    margin: 5px;
+    display: flex;
+    justify-content: center;
+}
+
+.paginationContainer li {
+    display: inline-flex;
+    padding: 15px;
+    border-radius: 205px;
+    margin: 5px;
+}
+
