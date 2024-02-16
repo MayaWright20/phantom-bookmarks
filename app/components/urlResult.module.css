@@ -1,0 +1,27 @@
+.urlResultTitle {
+    max-width: 80%;
+    overflow: scroll;
+    text-wrap: nowrap;
+}
+
+.iconsContainer {
+    width: 5%;
+    justify-content: space-between;
+    display: flex;
+}
+
+.editUrlContainer {
+    position: absolute;
+    align-self: center;
+    display: flex;
+    background-color: inherit;
+    padding:  5px;
+    width: 65%;
+}
+
+.editUrlInput {
+    display: flex;
+    background-color: inherit;
+    width: 80%;
+}
+

@@ -1,0 +1,14 @@
+.pillShape {
+    border-radius: 30px;
+    display: flex;
+    padding: 15px;
+    padding-right: 25px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    justify-content: space-between;
+    overflow: hidden;
+}
+
+.searchBar {
+    background-color: rgba(0, 0, 255, 0.612);
+}
