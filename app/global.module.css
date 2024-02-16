@@ -7,10 +7,18 @@
     margin-bottom: 10px;
     justify-content: space-between;
     overflow: hidden;
+    width: '80%'
 }
 
 .searchBar {
-    background-color: rgba(255, 0, 212, 0.612);
+    margin-top: 5%;
+    color:  #9E9EA7ff;
+    border-color: #FDF0FCff;
+    border-width: 1px;
+    /* margin-top: 5%; */
+    color:  #9E9EA7ff;
+    border-color: #C1C1C7ff;
+    box-shadow: 1px 1px 5px 5px #FDF0FCff;
 }
 
 .paginationContainer{
@@ -22,8 +30,18 @@
 
 .paginationContainer li {
     display: inline-flex;
-    padding: 15px;
-    border-radius: 205px;
-    margin: 5px;
+    justify-content: center;
+    align-items: center;
+    padding:  20px;
+    text-align: center;
+    text-justify: newspaper;
+    height:  20px;
+    width:  20px;
+    border-radius:  205px;
+    margin:  5px;
 }
+
+/* .activePaginationLink {
+    color: white !important;
+} */
 

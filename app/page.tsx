@@ -1,6 +1,5 @@
 'use client';
 import { useState, useEffect } from "react";
-import ReactDOM from 'react-dom';
 import ReactPaginate from 'react-paginate';
 
 import * as styles from "./global.module.css";
@@ -138,6 +137,7 @@ export default function Home() {
             previousLabel="<"
             renderOnZeroPageCount={null}
             containerClassName="paginationContainer"
+            activeLinkClassName="activePaginationLink"
           />
         </ul>
       </>
@@ -147,12 +147,10 @@ export default function Home() {
   return (
     <main className="flex flex-col items-center">
       <div className="" style={{ width: '80%' }}>
-        <div className={`${styles.pillShape} ${styles.searchBar}`}>
-          <form>
-            <input onChange={onChangeUrlInputHandler} value={url} type="url" />
+          <form className={`${styles.pillShape} ${styles.searchBar}`}>
+            <input onChange={onChangeUrlInputHandler} value={url} type="url" style={{width: '65vw'}}/>
             <button type="submit" onClick={onClickSubmitHandler}>Add</button>
           </form>
-        </div>
         <PaginatedItems itemsPerPage={20} />
       </div>
     </main>
