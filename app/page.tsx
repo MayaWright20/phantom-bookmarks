@@ -18,14 +18,12 @@ export default function Home() {
   const { width, height } = useWindowSize();
   const itemsPerPage = 20;
 
-
   useEffect(() => {
     const storedUrlResults = localStorage.getItem('urlResults');
     if (storedUrlResults) {
       setUrlResults(JSON.parse(storedUrlResults));
     };
   }, []);
-
 
   const onChangeUrlInputHandler = (e) => {
     const url = e.target.value;
@@ -52,7 +50,6 @@ export default function Home() {
           localStorage.setItem('urlResults', JSON.stringify(updatedResults));
           return updatedResults;
         });
-
 
         setIsExploding(true);
         setTimeout(() => {
