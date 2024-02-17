@@ -146,7 +146,7 @@ export default function Home() {
     return (
       <>
         <Items currentItems={currentItems} />
-        <ul className={styles.paginationContainer}>
+        <div className={styles.paginationContainer}>
           <ReactPaginate
             breakLabel=""
             nextLabel=">"
@@ -159,7 +159,7 @@ export default function Home() {
             containerClassName="paginationContainer"
             activeLinkClassName="activePaginationLink"
           />
-        </ul>
+        </div>
       </>
     )
   };
