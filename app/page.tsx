@@ -1,11 +1,8 @@
 'use client';
-
-import Image from 'next/image';
-import { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { useWindowSize } from 'react-use';
-import Confetti from 'react-confetti'
-import ReactPaginate from 'react-paginate';
-
+import Confetti from 'react-confetti';
+import Image from 'next/image';
 import * as styles from "./global.module.css";
 import UrlResult from "./components/urlResult";
 import icon from "../public/icon.gif";
@@ -17,10 +14,10 @@ export default function Home() {
   const [editUrl, setEditUrl] = useState<string>('');
   const [value, setValue] = useState<string>('');
   const [isExploding, setIsExploding] = useState<boolean>(false);
-  const [firstPage, setFirstPage] = useState<boolean>(false);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const { width, height } = useWindowSize();
+  const itemsPerPage = 20;
 
- 
 
   useEffect(() => {
     const storedUrlResults = localStorage.getItem('urlResults');
@@ -28,6 +25,7 @@ export default function Home() {
       setUrlResults(JSON.parse(storedUrlResults));
     };
   }, []);
+
 
   const onChangeUrlInputHandler = (e) => {
     const url = e.target.value;
@@ -75,14 +73,13 @@ export default function Home() {
     });
   };
 
-  function onChangeUrlEditHandler(e) {
+  const onChangeUrlEditHandler = (e) => {
     const url = e.target.value;
     setEditUrl(url);
     setValue(url)
   };
 
-  async function onClickUrlSubmitHandler(e, index: number) {
-    //DO NOT CHANGE THIS E.PREVENT FUNCTION
+  const onClickUrlSubmitHandler = async (e, index: number) => {
     e.preventDefault();
     const urlPattern = /^(https?:\/\/.)[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
     if (!urlPattern.test(editUrl.trim())) {
@@ -109,66 +106,14 @@ export default function Home() {
     }
   };
 
-  function Items({ currentItems }) {
-    return (
-      <ul style={{ flexDirection: 'column' }}>
-        {currentItems &&
-          currentItems.map((item, index) => (
-            <UrlResult
-              key={index}
-              index={index}
-              urlTitle={item}
-              deleteUrlResultHandler={() => deleteUrlResultHandler(index)}
-              onClick={(e) => onClickUrlSubmitHandler(e, index)}
-              onChange={(e) => onChangeUrlEditHandler(e)}
-              value={value}
-            />
-          ))}
-      </ul>
-    );
-  };
-  
-  function PaginatedItems({ itemsPerPage, firstPage }) {
-    const [itemOffset, setItemOffset] = useState(0);
-    const endOffset = itemOffset + itemsPerPage;
-    const currentItems = urlResults.slice(itemOffset, endOffset);
-    const pageCount = Math.ceil(urlResults.length / itemsPerPage);
+  const paginatedResults = useMemo(() => {
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    return urlResults.slice(startIndex, endIndex);
+  }, [urlResults, currentPage]);
 
-    function handlePageClick(event){
-      const newOffset = (event.selected * itemsPerPage) % urlResults.length;
-      if(firstPage){
-        setItemOffset(0)
-      }else{
-        setItemOffset(newOffset);
-      }
-    };
-
-    return (
-      <>
-        <Items currentItems={currentItems} />
-        <div className={styles.paginationContainer}>
-          <ReactPaginate
-            breakLabel=""
-            nextLabel=">"
-            onPageChange={handlePageClick}
-            pageRangeDisplayed={2}
-            marginPagesDisplayed={0}
-            pageCount={pageCount}
-            previousLabel="<"
-            renderOnZeroPageCount={null}
-            containerClassName="paginationContainer"
-            activeLinkClassName="activePaginationLink"
-          />
-        </div>
-      </>
-    )
-  };
-
-  function firstPageHandler(){
-    setFirstPage(true);
-    setTimeout(()=>{
-      setFirstPage(false);
-    },500);
+  const onPageChange = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
   };
 
   return (
@@ -192,7 +137,7 @@ export default function Home() {
           '#FDEFDFff',
         ]}
       />}
-      <button onClick={firstPageHandler}>
+      <button onClick={() => onPageChange(1)}>
         <Image src={icon} alt='first page' height={50} width={50} className='ml-5 mt-5' />
       </button>
       <div className="self-center" style={{ width: '80%' }}>
@@ -200,10 +145,29 @@ export default function Home() {
           <input onChange={onChangeUrlInputHandler} value={url} type="url" style={{ width: '65vw' }} />
           <button type="submit" onClick={onClickSubmitHandler}>Add</button>
         </form>
-        <PaginatedItems itemsPerPage={20} firstPage={firstPage}/>
+        <ul>
+        {paginatedResults.map((item, index) => (
+          <UrlResult
+            key={index}
+            index={(currentPage - 1) * itemsPerPage + index}
+            urlTitle={item}
+            deleteUrlResultHandler={() => deleteUrlResultHandler((currentPage - 1) * itemsPerPage + index)}
+            onClick={(e) => onClickUrlSubmitHandler(e, (currentPage - 1) * itemsPerPage + index)}
+            onChange={(e) => onChangeUrlEditHandler(e)}
+            value={value}
+          />
+        ))}
+      </ul>
+      <div className={styles.paginationContainer}>
+        <button className={styles.previousPageBtn} onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+          <h1>{"<"}</h1>
+        </button>
+        <span className={styles.currentPageBtn}>{currentPage}</span>
+        <button className={styles.nextPageBtn} onClick={() => onPageChange(currentPage + 1)} disabled={paginatedResults.length < itemsPerPage}>
+          <h1>{">"}</h1>
+        </button>
+      </div>
       </div>
     </main>
   );
 };
-
-

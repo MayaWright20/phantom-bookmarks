@@ -28,7 +28,7 @@
     justify-content: center;
 }
 
-.paginationContainer li {
+.paginationContainer button, .paginationContainer span  {
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,14 @@
     margin:  5px;
 }
 
-/* .activePaginationLink {
-    color: white !important;
-} */
+.previousPageBtn {
+    background-color: #FDF0FCff;
+}
 
+.currentPageBtn {
+    background-color: #FFEDCBff;
+}
+
+.nextPageBtn {
+    background-color: #DCF3FEff;
+}

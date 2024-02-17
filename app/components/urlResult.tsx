@@ -21,6 +21,7 @@ export default function UrlResult({
     onClick,
     onChange,
     value,
+
 }: UrlResultProps) {
 
     const [displayTextInput, setDisplayInput] = useState<boolean>(false);
@@ -39,6 +40,11 @@ export default function UrlResult({
         };
     };
 
+    function submitHandler(e){
+        onClick(e, index);
+        setDisplayInput(false);
+    }
+
     return (
         <li ref={newRef} key={index} className={globalStyles.pillShape}>
             <div className={styles.urlResultTitle} >
@@ -52,10 +58,10 @@ export default function UrlResult({
                     <MdDeleteOutline />
                 </button>
             </div>
-            {displayTextInput ?
+            {displayTextInput ? 
                 <form className={styles.editUrlContainer}>
                     <input onChange={(e) => onChange(e)} value={value} type="url" className={styles.editUrlInput} />
-                    <button type="submit" onClick={(e) => onClick(e, index)}>Save</button>
+                    <button type="submit" onClick={(e)=>submitHandler(e)}>Save</button>
                 </form>
                 : null
             }
