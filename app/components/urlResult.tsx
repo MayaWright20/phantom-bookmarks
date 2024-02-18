@@ -46,11 +46,11 @@ export default function UrlResult({
     }
 
     return (
-        <li ref={newRef} key={index} className={globalStyles.pillShape}>
-            <div className={styles.urlResultTitle} >
+        <li ref={newRef} key={index} className={`${globalStyles.pillShape}`}>
+            <div className={`${styles.urlResultTitle}`} >
                 {urlTitle}
             </div>
-            <div className={styles.iconsContainer}>
+            <div className={`${styles.iconsContainer}`}>
                 <button onClick={() => setDisplayInput(prev => !prev)}>
                     <FaRegEdit />
                 </button>
@@ -59,8 +59,8 @@ export default function UrlResult({
                 </button>
             </div>
             {displayTextInput ? 
-                <form className={styles.editUrlContainer}>
-                    <input onChange={(e) => onChange(e)} value={value} type="url" className={styles.editUrlInput} />
+                <form className={`${styles.editUrlContainer}`}>
+                    <input onChange={(e) => onChange(e)} value={value} type="url" className={`${styles.editUrlInput}`} />
                     <button type="submit" onClick={(e)=>submitHandler(e)}>Save</button>
                 </form>
                 : null

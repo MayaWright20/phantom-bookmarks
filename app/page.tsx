@@ -174,7 +174,7 @@ export default function Home() {
       </button>
       <div className="self-center" style={{ width: '80%' }}>
         <form className={`${styles.pillShape} ${styles.searchBar}`}>
-          <input onChange={onChangeUrlInputHandler} value={url} type="url" className={styles.input}/>
+          <input onChange={onChangeUrlInputHandler} value={url} type="url" className={`${styles.input}`}/>
           <button type="submit" onClick={onClickSubmitHandler}>Add</button>
         </form>
         <ul>
@@ -190,12 +190,12 @@ export default function Home() {
           />
         ))}
       </ul>
-      <div className={styles.paginationContainer}>
-        <button className={styles.previousPageBtn} onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
+      <div className={`${styles.paginationContainer}`}>
+        <button className={`${styles.previousPageBtn}`} onClick={() => onPageChange(currentPage - 1)} disabled={currentPage === 1}>
           <h1>{"<"}</h1>
         </button>
-        <span className={styles.currentPageBtn}>{currentPage}</span>
-        <button className={styles.nextPageBtn} onClick={() => onPageChange(currentPage + 1)} disabled={paginatedResults.length < itemsPerPage}>
+        <span className={`${styles.currentPageBtn}`}>{currentPage}</span>
+        <button className={`${styles.nextPageBtn}`} onClick={() => onPageChange(currentPage + 1)} disabled={paginatedResults.length < itemsPerPage}>
           <h1>{">"}</h1>
         </button>
       </div>
