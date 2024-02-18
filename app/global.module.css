@@ -26,7 +26,7 @@
     box-shadow: 1px 1px 5px 5px #FDF0FCff;
 }
 .input{
-    width: '65vw'
+    width: 65vw;
 }
 .paginationContainer{
     padding: 5px;
