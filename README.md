@@ -16,7 +16,7 @@ A link to the hosted website can be found here [Vercel](https://phantom-bookmark
 Full documentation can be found at [Bookmarks Documentation](https://watery-turquoise-b47.notion.site/Phantom-Frontend-Developer-Test-f01307b9e59b4380b1f26ac3318996c3?pvs=4)
 
 ## Design Choices 
- - simple design inspired by photos in the 'Design Inspo' section of (full documentation)[https://watery-turquoise-b47.notion.site/Phantom-Frontend-Developer-Test-f01307b9e59b4380b1f26ac3318996c3?pvs=4]
+ - simple design inspired by photos in the 'Design Inspo' section of [full documentation](https://watery-turquoise-b47.notion.site/Phantom-Frontend-Developer-Test-f01307b9e59b4380b1f26ac3318996c3?pvs=4)
  - confetti shown when user enters a URL for the first time 
 
 ## Areas to improve on given more time
