@@ -15,6 +15,7 @@ export default function Home() {
   const [value, setValue] = useState<string>('');
   const [isExploding, setIsExploding] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(1);
+  const [showThankyou, setShowThankyou] = useState<boolean>(false);
   const { width, height } = useWindowSize();
   const itemsPerPage = 20;
 
@@ -52,8 +53,10 @@ export default function Home() {
         });
 
         setIsExploding(true);
+        setShowThankyou(true);
         setTimeout(() => {
           setIsExploding(false);
+          setShowThankyou(false);
         }, 5000)
         setUrl('');
       }
@@ -137,9 +140,41 @@ export default function Home() {
       <button onClick={() => onPageChange(1)}>
         <Image src={icon} alt='first page' height={50} width={50} className='ml-5 mt-5' />
       </button>
+      <button onClick={() => onPageChange(1)}>
+      <div className={styles.header}>
+        {!showThankyou ?
+        <span>
+          <p>B</p>
+        <p>O</p>
+        <p>O</p>
+        <p>K</p>
+        <p>M</p>
+        <p>A</p>
+        <p>R</p>
+        <p>K</p>
+        <p>S</p>
+        </span>
+        
+        : 
+        <span>
+          <p>T</p>
+          <p>H</p>
+          <p>A</p>
+          <p>N</p>
+          <p>K</p>
+          <p></p>
+          <p>Y</p>
+          <p>O</p>
+          <p>U</p>
+        </span>
+        
+}
+        
+      </div>
+      </button>
       <div className="self-center" style={{ width: '80%' }}>
         <form className={`${styles.pillShape} ${styles.searchBar}`}>
-          <input onChange={onChangeUrlInputHandler} value={url} type="url" style={{ width: '65vw' }} />
+          <input onChange={onChangeUrlInputHandler} value={url} type="url" className={styles.input}/>
           <button type="submit" onClick={onClickSubmitHandler}>Add</button>
         </form>
         <ul>

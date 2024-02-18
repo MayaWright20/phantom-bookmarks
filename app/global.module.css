@@ -7,7 +7,12 @@
     margin-bottom: 10px;
     justify-content: space-between;
     overflow: hidden;
-    width: '80%'
+    width: '80%';
+    margin-bottom: 1px;
+}
+
+.pillShape:hover {
+    opacity: 0.5;
 }
 
 .searchBar {
@@ -20,7 +25,9 @@
     border-color: #C1C1C7ff;
     box-shadow: 1px 1px 5px 5px #FDF0FCff;
 }
-
+.input{
+    width: '65vw'
+}
 .paginationContainer{
     padding: 5px;
     margin: 5px;
@@ -52,3 +59,22 @@
 .nextPageBtn {
     background-color: #DCF3FEff;
 }
+
+.header {
+    text-align: center;
+    font-size: 30px;
+    
+}
+
+.header p {
+    display: inline-flex;
+    height:  20px;
+    width:  20px;
+    padding:  20px;
+    margin:  1px;
+    border-radius:  50%;
+    justify-content: center;
+    align-items: center;
+    vertical-align: middle;
+}
+
