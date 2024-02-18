@@ -26,12 +26,12 @@ export default function Home() {
     };
   }, []);
 
-  const onChangeUrlInputHandler = (e) => {
+  const onChangeUrlInputHandler = (e: any) => {
     const url = e.target.value;
     setUrl(url);
   };
 
-  const onClickSubmitHandler = async (e) => {
+  const onClickSubmitHandler = async (e : any) => {
     e.preventDefault();
 
     const urlPattern = /^(https?:\/\/.)[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
@@ -73,13 +73,13 @@ export default function Home() {
     });
   };
 
-  const onChangeUrlEditHandler = (e) => {
+  const onChangeUrlEditHandler = (e: any) => {
     const url = e.target.value;
     setEditUrl(url);
     setValue(url)
   };
 
-  const onClickUrlSubmitHandler = async (e, index: number) => {
+  const onClickUrlSubmitHandler = async (e: any, index: number) => {
     e.preventDefault();
     const urlPattern = /^(https?:\/\/.)[-a-zA-Z0-9@:%._\+~#=]{0,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$/;
     if (!urlPattern.test(editUrl.trim())) {

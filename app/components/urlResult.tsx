@@ -34,13 +34,13 @@ export default function UrlResult({
         };
     });
 
-    const handleOutsideClick = (e) => {
+    const handleOutsideClick = (e: any) => {
         if (newRef.current && !newRef.current.contains(e.target)) {
             setDisplayInput(false);
         };
     };
 
-    function submitHandler(e){
+    function submitHandler(e : any){
         onClick(e, index);
         setDisplayInput(false);
     }
