@@ -3,7 +3,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { useWindowSize } from 'react-use';
 import Confetti from 'react-confetti';
 import Image from 'next/image';
-import * as styles from "./global.module.css";
+import styles from "./global.module.css";
 import UrlResult from "./components/urlResult";
 import icon from "../public/icon.gif";
 

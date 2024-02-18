@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { FaRegEdit } from "react-icons/fa";
 import { MdDeleteOutline } from "react-icons/md";
 
-import * as globalStyles from '../global.module.css';
+import globalStyles from '../global.module.css';
 import styles from './urlResult.module.css';
 
 interface UrlResultProps {
