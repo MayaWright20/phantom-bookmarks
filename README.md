@@ -13,7 +13,7 @@ npm run dev
 ## Vercel 
 A link to the hosted website can be found here [Vercel](https://phantom-bookmarks-three.vercel.app/)
 
-Full documentation can be found at [Bookmarks Documentation](https://www.notion.so/Phantom-Frontend-Developer-Test-f01307b9e59b4380b1f26ac3318996c3?pvs=4)
+Full documentation can be found at [Bookmarks Documentation](https://watery-turquoise-b47.notion.site/Phantom-Frontend-Developer-Test-f01307b9e59b4380b1f26ac3318996c3?pvs=4)
 
 ## Design Choices 
  - simple design inspired by photos in the 'Design Inspo' section of the full documentation
